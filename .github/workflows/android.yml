@@ -1,0 +1,46 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: gradle
+
+    - name: Write key
+      if: ${{ ( github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev' )) || github.ref_type == 'tag' }}
+      run: |
+        if [ ! -z "${{ secrets.KEYSTORE }}" ]; then
+          {
+            echo KEYSTORE_PASSWORD='${{ secrets.KEYSTORE_PASSWORD }}'
+            echo KEY_ALIAS='onHit'
+            echo KEY_PASSWORD='${{ secrets.KEY_PASSWORD }}'
+            echo KEYSTORE_FILE='key.jks'
+          } >> gradle.properties
+          echo ${{ secrets.KEYSTORE }} | base64 -d > key.jks
+        fi
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    - name: Build Debug and Release
+      run: ./gradlew assembleDebug assembleRelease
+
+    - name: Upload APKs
+      uses: actions/upload-artifact@v3
+      with:
+        name: onhit-apks
+        path: |
+          app/build/outputs/apk/debug/app-debug.apk
+          app/build/outputs/apk/release/app-release.apk
