@@ -8,7 +8,6 @@ from telegram import Bot, InputMediaDocument
 
 
 TOKEN: Final[str] = os.getenv("TELEGRAM_BOT_TOKEN")
-BASE_URL: Final[str] = f"https://api.telegram.org/bot{TOKEN}"
 TARGET_CHAT: Final[str] = "@on_Hit"
 TARGET_TOPIC_ID: Final[int] = 4 # CI Build Topic ID
 USE_REMOTE_MESSAGE: Final[bool] = True
