@@ -14,13 +14,15 @@ on:
           - 'major'
           - 'minor'
           - 'patch'
+          - 'none'
       update_description:
         description: "Release notes (optional)"
         required: false
         type: string
 
 jobs:
-  modify_version_and_build_release:
+  build_release:
+    environment: main_build
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -32,6 +34,7 @@ jobs:
           fetch-depth: 0
 
       - name: Modify Version
+        if: inputs.update_type != 'none'
         shell: bash
         run: |
           RAW_VERSION=$(grep "versionName =" app/build.gradle.kts | awk -F'["-]' '{print $2}')
@@ -52,6 +55,7 @@ jobs:
           echo "VERSION=$NEW_VERSION" >> "$GITHUB_ENV"
 
       - name: Push to Repo
+        if: inputs.update_type != 'none'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
