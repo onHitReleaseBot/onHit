@@ -11,8 +11,6 @@
     void handleLoadPackage(...);
     void initZygote(...);
 }
--assumenosideeffects class kotlinx.coroutines.debug.internal.DebugProbesImpl { *; }
--dontwarn kotlinx.coroutines.debug.**
 
 -assumenosideeffects class android.util.Log {
     public static *** i(...);
