@@ -9,6 +9,9 @@ from telegram import Bot, InputMediaDocument, Message
 
 ARGS: Final[List[str]] = sys.argv[1:]
 TOKEN: Final[str] = os.getenv("TELEGRAM_BOT_TOKEN")
+if not TOKEN:
+    print("Token is empty, skipping upload and exiting.")
+    sys.exit(0)
 TARGET_CHAT: Final[str] = "@on_Hit"
 TARGET_TOPIC_ID: Final[int] = 271 if ARGS else 4
 CAPTION_TEMPLATE: Final[str] = """
