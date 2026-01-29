@@ -121,22 +121,18 @@ jobs:
         with:
           tag_name: v${{ env.VERSION }}
           name: v${{ env.VERSION }}
-          generate_release_notes: true
-          draft: true
-
-      - uses: softprops/action-gh-release@v2
-        with:
-          tag_name: v${{ env.VERSION }}
-          name: v${{ env.VERSION }}
-          append_body: true
           body: |
-            ---
+            ## v${{ env.VERSION }}
             
             ***Mapping files are provided for internal debugging and crash symbolication only.***
             
             ${{ inputs.update_description }}
+
+            
           draft: false
           prerelease: false
+          append_body: true
+          generate_release_notes: true
           files: |
             app/build/outputs/apk/debug/*.apk
             app/build/outputs/apk/release/*.apk
