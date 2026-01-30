@@ -52,7 +52,13 @@ jobs:
           echo "Target XMR Tag: $XMR_TAG"
           echo "xmr_tag=$XMR_TAG" >> $GITHUB_OUTPUT
           echo "version_name=$VN" >> $GITHUB_OUTPUT
-
+          TARGET_TAG="${{ github.event.inputs.tag_name || github.event.release.tag_name }}"
+          REL_JSON=$(gh release view "$TARGET_TAG" --json body)
+          REL_BODY=$(echo "$REL_JSON" | jq -r '.body')
+          echo "rel_body<<EOF" >> $GITHUB_OUTPUT
+          echo "$REL_BODY" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          
       - name: Upload to Xposed Repo
         uses: softprops/action-gh-release@v2
         with:
@@ -60,8 +66,7 @@ jobs:
           token: ${{ secrets.XPOSED_MODULES_REPO_PUBLISH_TOKEN }}
           tag_name: ${{ steps.parse_version.outputs.xmr_tag }}
           name: ${{ github.event.release.name || steps.parse_version.outputs.version_name }}
-          body: ${{ github.event.release.body }}
+          body: ${{ steps.parse_version.outputs.rel_body }}
           files: "sync-assets/*"
           draft: false
           prerelease: false
-
