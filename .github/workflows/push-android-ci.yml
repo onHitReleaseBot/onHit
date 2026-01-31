@@ -1,4 +1,4 @@
-name: Android CI
+name: Android CI (Push)
 
 permissions:
   contents: read
@@ -7,9 +7,12 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - '.github/workflows/android_on_push.yml'
+      - '.github/workflows/push-android-ci.yml'
       - 'app/**'
       - 'gradle/**'
+      - 'build.gradle.kts'
+      - 'gradle.properties'
+      - 'settings.gradle.kts'
     
 jobs:
   build:

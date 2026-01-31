@@ -1,4 +1,4 @@
-name: Pull Request Check
+name: Android CI (PR)
 
 permissions:
   contents: read
