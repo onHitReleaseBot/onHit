@@ -2,8 +2,9 @@
 
 <div align="center">
 
-<img src="onhit-logo.svg" alt="icon" width="150" />
+<img src="https://raw.githubusercontent.com/0penPublic/onHit/refs/heads/main/onhit-logo.svg" alt="icon" width="150" />
 
+![Release Download](https://img.shields.io/github/downloads/Xposed-Modules-Repo/mba.vm.onhit/total?style=flat-square)
 ![Release Download](https://img.shields.io/github/downloads/0penPublic/onHit/total?style=flat-square)
 [![Release Version](https://img.shields.io/github/v/release/0penPublic/onHit?style=flat-square)](https://github.com/0penPublic/onHit/releases/latest)  
 [![GitHub Star](https://img.shields.io/github/stars/0penPublic/onHit?style=flat-square)](https://github.com/0penPublic/onHit/stargazers)
@@ -110,4 +111,10 @@ See the `LICENSE` file for full license text.
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=0penPublic/onHit&type=date&legend=top-left)](https://www.star-history.com/#0penPublic/onHit&type=date&legend=top-left)
+<a href="https://www.star-history.com/#0penPublic/onHit&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=0penPublic/onHit&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=0penPublic/onHit&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=0penPublic/onHit&type=date&legend=top-left" />
+ </picture>
+</a>
